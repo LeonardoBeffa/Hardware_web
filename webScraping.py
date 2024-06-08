@@ -7,7 +7,7 @@ from pichau_web import pichau_web
 
 os.system('cls')
 nome_arquivo = 'preco_placa_de_video'
-diretorio = 'C:/Users/Beffa/Documents/Python/webScraping/Hardware'
+diretorio = 'SEU DIRETORIO DE SALVAMENTO'
 
 headers = {'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"}
 dic_produtos = {'marca':[], 'preco':[],'loja':[],'link':[]}
