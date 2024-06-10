@@ -21,17 +21,16 @@ def terabyte_web(dic_produtos):
 
         for item in soup.find_all('div', class_='pbox'):
             try:
-                titulo = item.find('a', class_=re.compile('prod-name')).get_text().strip()
-                preco_a_vista = item.find('div', class_=re.compile('prod-new-price')).get_text().strip('  à vista')
+                nome = item.find('a', class_=re.compile('prod-name')).get_text().strip()
+                valor = item.find('div', class_=re.compile('prod-new-price')).get_text().strip('  à vista')
                 link = item.find('a', class_=re.compile('prod-name')).get('href')
 
-                if ',' in preco_a_vista:
-                    dic_produtos['marca'].append(titulo)
-                    dic_produtos['preco'].append(preco_a_vista)
-                    dic_produtos['loja'].append('Terabyte')
-                    dic_produtos['link'].append(link)
-
-                    print(f'Título: {titulo}, Preço: {preco_a_vista}, Link: {link}')
+                if ',' in valor:
+                    dic_produtos['Nome'].append(nome)
+                    dic_produtos['Valor'].append(valor)
+                    dic_produtos['Loja'].append('Terabyte')
+                    dic_produtos['Link'].append(link)
+                    print(f'Nome: {nome} Valor: {valor}')
             except AttributeError:
                 continue
 

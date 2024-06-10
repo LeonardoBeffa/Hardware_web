@@ -33,11 +33,11 @@ def amazon_web(dic_produtos):
             
             try:
                 if nome == None:
-                    preco = None
+                    valor = None
                 else:
-                    preco = produto.find('span', class_=re.compile('a-offscreen')).get_text().strip()
+                    valor = produto.find('span', class_=re.compile('a-offscreen')).get_text().strip()
             except:
-                preco = None
+                valor = None
 
             try:
                 link = produto.find('a', class_=re.compile('a-link-normal')).get('href')
@@ -45,13 +45,13 @@ def amazon_web(dic_produtos):
             except:
                 link = None
 
-            if preco == None:
+            if valor == None:
                 nome = None
             else:
                 idx += 1
-                dic_produtos['marca'].append(nome)
-                dic_produtos['preco'].append(preco)
-                dic_produtos['loja'].append('Amazon')
-                dic_produtos['link'].append(link_tratado)
-                print(f'idx {idx} nome: {nome} valor: {preco}')
+                dic_produtos['Nome'].append(nome)
+                dic_produtos['Valor'].append(valor)
+                dic_produtos['Loja'].append('Amazon')
+                dic_produtos['Link'].append(link_tratado)
+                print(f'Nome: {nome} Valor: {valor}')
     return dic_produtos

@@ -30,13 +30,13 @@ def pichau_web(dic_produtos):
                 prod_finds = driver.find_elements(By.XPATH,f'/html/body/div[1]/div[1]/main/div[2]/div/div[1]/div[3]/div[{i}]')
                 for prod in prod_finds:
                     nome = prod.find_element(By.XPATH,f'/html/body/div[1]/div[1]/main/div[2]/div/div[1]/div[3]/div[{i}]/a/div/div[3]/h2').text
-                    preco = prod.find_element(By.XPATH,f'/html/body/div[1]/div[1]/main/div[2]/div/div[1]/div[3]/div[{i}]/a/div/div[3]/div/div[1]/div/div[2]').text
+                    valor = prod.find_element(By.XPATH,f'/html/body/div[1]/div[1]/main/div[2]/div/div[1]/div[3]/div[{i}]/a/div/div[3]/div/div[1]/div/div[2]').text
                     link = prod.find_element(By.XPATH,f'/html/body/div[1]/div[1]/main/div[2]/div/div[1]/div[3]/div[{i}]/a').get_attribute('href')
-                    dic_produtos['marca'].append(nome)
-                    dic_produtos['preco'].append(preco)
-                    dic_produtos['loja'].append('Pichau')
-                    dic_produtos['link'].append(link)
-                    print(f'nome: {nome} valor: {preco} link: {link} Pag: 1')
+                    dic_produtos['Nome'].append(nome)
+                    dic_produtos['Valor'].append(valor)
+                    dic_produtos['Loja'].append('Pichau')
+                    dic_produtos['Link'].append(link)
+                    print(f'nome: {nome} valor: {valor} link: {link} Pag: 1')
             driver.quit()
         else:
             browser_options = Options()
@@ -51,19 +51,19 @@ def pichau_web(dic_produtos):
                 for prod in prod_finds:
                     nome = prod.find_element(By.XPATH,f'/html/body/div[1]/div[1]/main/div[2]/div/div[1]/div[3]/div[{i}]/a/div/div[3]/h2').text
                     try:
-                        preco = prod.find_element(By.XPATH,f'/html/body/div[1]/div[1]/main/div[2]/div/div[1]/div[3]/div[{i}]/a/div/div[3]/div/div[1]/div/div[2]').text
+                        valor = prod.find_element(By.XPATH,f'/html/body/div[1]/div[1]/main/div[2]/div/div[1]/div[3]/div[{i}]/a/div/div[3]/div/div[1]/div/div[2]').text
                     except:
-                        preco = None
+                        valor = None
                     link = prod.find_element(By.XPATH,f'/html/body/div[1]/div[1]/main/div[2]/div/div[1]/div[3]/div[{i}]/a').get_attribute('href')
-                    if preco == None:
+                    if valor == None:
                         end = 1
                         break
                     else:
-                        dic_produtos['marca'].append(nome)
-                        dic_produtos['preco'].append(preco)
-                        dic_produtos['loja'].append('Pichau')
-                        dic_produtos['link'].append(link)
-                        print(f'nome: {nome} valor: {preco} link: {link} Pag: {num}')
+                        dic_produtos['Nome'].append(nome)
+                        dic_produtos['Valor'].append(valor)
+                        dic_produtos['Loja'].append('Pichau')
+                        dic_produtos['Link'].append(link)
+                        print(f'Nome: {nome} Valor: {valor}')
             driver1.quit()
             if end == 1:
                 break

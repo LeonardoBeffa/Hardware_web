@@ -46,17 +46,17 @@ def kabum_web(dic_produtos,headers):
             for item in sopa.find_all('article', {'class': 'productCard'}):
                 wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'priceCard')))
                 
-                titulo = item.find('span', class_='nameCard').text
-                preco_a_vista = item.find('span', class_='priceCard').text
+                nome = item.find('span', class_='nameCard').text
+                valor = item.find('span', class_='priceCard').text
                 link = driver.find_element(By.XPATH,f'//*[@id="listing"]/div[3]/div/div/div[2]/div[1]/main/article[{num}]/a').get_attribute('href')
                 num = num+1 
 
-                if ',' in preco_a_vista:
-                    print(titulo, preco_a_vista) 
-                    dic_produtos['marca'].append(titulo)
-                    dic_produtos['preco'].append(preco_a_vista)
-                    dic_produtos['loja'].append('Kabum')
-                    dic_produtos['link'].append(link)                     
+                if ',' in valor: 
+                    dic_produtos['Nome'].append(nome)
+                    dic_produtos['Valor'].append(valor)
+                    dic_produtos['Loja'].append('Kabum')
+                    dic_produtos['Link'].append(link)
+                    print(f'Nome: {nome} Valor: {valor}')                     
         
         except Exception as e:
             print("Exceção:", e)
