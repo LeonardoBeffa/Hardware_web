@@ -14,7 +14,7 @@ dic_produtos = {'marca':[], 'preco':[],'loja':[],'link':[]}
 
 print("Iniciando o programa...")
 print("Amazon")
-amazon_web(dic_produtos,headers)
+amazon_web(dic_produtos)
 print("Pichau")
 pichau_web(dic_produtos)
 print("Terabyte")
