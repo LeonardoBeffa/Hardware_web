@@ -8,8 +8,7 @@ from bs4 import BeautifulSoup
 import requests
 
 def kabum_web(dic_produtos,headers):
-    
-    url = f'https://www.kabum.com.br/hardware/placa-de-video-vga?page_number=1&page_size=100&facet_filters=&sort=most_searched'
+    url = f'https://www.kabum.com.br/perifericos/teclado-gamer?page_number=1&page_size=100&facet_filters=&sort=most_searched'
     site = requests.get(url, headers=headers)
     soup = BeautifulSoup(site.content, 'html.parser')
     qtd_itens = soup.find('div', id='listingCount').get_text().strip()
@@ -21,7 +20,7 @@ def kabum_web(dic_produtos,headers):
     condicional_opc = ultima_pagina
 
     for i in range(1,condicional_opc):
-        url_page = f'https://www.kabum.com.br/hardware/placa-de-video-vga?page_number={i}&page_size=20&facet_filters=&sort=most_searched'
+        url_page = f'https://www.kabum.com.br/perifericos/teclado-gamer?page_number={i}&page_size=100&facet_filters=&sort=most_searched'
         browser_options = Options()
         browser_options.add_argument('--headless')
         driver = webdriver.Firefox(options=browser_options)
@@ -46,17 +45,17 @@ def kabum_web(dic_produtos,headers):
             for item in sopa.find_all('article', {'class': 'productCard'}):
                 wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'priceCard')))
                 
-                nome = item.find('span', class_='nameCard').text
-                valor = item.find('span', class_='priceCard').text
+                titulo = item.find('span', class_='nameCard').text
+                preco_a_vista = item.find('span', class_='priceCard').text
                 link = driver.find_element(By.XPATH,f'//*[@id="listing"]/div[3]/div/div/div[2]/div[1]/main/article[{num}]/a').get_attribute('href')
                 num = num+1 
 
-                if ',' in valor: 
-                    dic_produtos['Nome'].append(nome)
-                    dic_produtos['Valor'].append(valor)
-                    dic_produtos['Loja'].append('Kabum')
-                    dic_produtos['Link'].append(link)
-                    print(f'Nome: {nome} Valor: {valor}')                     
+                if ',' in preco_a_vista:
+                    print(titulo, preco_a_vista) 
+                    dic_produtos['marca'].append(titulo)
+                    dic_produtos['preco'].append(preco_a_vista)
+                    dic_produtos['loja'].append('Kabum')
+                    dic_produtos['link'].append(link)                     
         
         except Exception as e:
             print("Exceção:", e)
